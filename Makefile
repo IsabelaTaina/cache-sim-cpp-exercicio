@@ -1,10 +1,11 @@
 CXX = g++
-CXXFLAGS = -std=c++98 -Iinclude -Wall -O2
+CXXFLAGS = -std=c++98 -Wall -O2 -Iinclude -Imy-lib/include
 
 SRC = src/Cache.cpp \
       src/MemoriaPrincipal.cpp \
       src/Processador.cpp \
-      src/main.cpp
+      src/main.cpp \
+      my-lib/src/bitutils.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -15,8 +16,8 @@ all: $(OUTPUT)
 $(OUTPUT): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(OUTPUT)
 
-src/%.o: src/%.cpp
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f src/*.o $(OUTPUT)
+	rm -f $(OBJ) $(OUTPUT)
